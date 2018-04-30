@@ -1,0 +1,167 @@
+Installation Instructions
+*************************
+
+Copyright (C) 2011, 2012 Free Software Foundation, Inc.
+
+   This file is free documentation; the Free Software Foundation gives
+unlimited permission to copy, distribute and modify it.
+
+System Requirements
+===================
+- NVIDIA Graphics card with CUDA 1.3 support 
+  An up-to-date list of CUDA-enabled GPUs can be found on the NVIDIA CUDA Web 
+  site at http://developer.nvidia.com/cuda-gpus or 
+  http://en.wikipedia.org/wiki/CUDA )
+
+  To verify which video adapter your system uses, find the model number by going 
+  to your distribution's equivalent of System Properties, or, from the command 
+  line, enter:
+           `lspci | grep -i nvidia'
+  If you do not see any settings, update the PCI hardware database that Linux 
+  maintains by entering update-pciids (generally found in /sbin) at the command 
+  line and rerun the previous lspci command.
+
+- Verify you have a supported version of Linux. The CUDA Development Tools are 
+  only supported on some specific distributions of Linux. These are listed in 
+  the CUDA Toolkit release notes. To determine which distribution and release 
+  number you're running, type the following at the command line:
+          `uname -m && cat /etc/*release'
+
+- For build and install the library you need cmake 2.6.2 or higher.
+  Verify your version at the command line:
+          `cmake --version'
+
+- Verify That gcc Is Installed: `gcc --version'
+
+
+
+Basic Installation
+==================
+
+Go to the /build directory to create an OUT-OF-SOURCE-Build. 
+
+Briefly, the shell commands `cmake ../; make; make install' should configure, 
+build, and install this package.
+
+All intern cmake files will generated inside the build- directory, also the 
+makefiles. If you should have cmake update problems, only remove all files and 
+directory in /build by using "rm -rf *" and install again.
+
+The simplest way to compile this package is:
+
+  1. `cd' to the directory containing the package's source code and the build 
+  	 directory. `cd' to the build directory and type `cmake ../' to configure 
+  	 the package for your system.
+
+     Running `cmake' might take a while.  While running, it prints
+     some messages telling which features it is checking for.
+
+  2. Type `make' to compile the package.
+
+  3. Type `make install' to install the programs and any data files and
+     documentation.
+
+  4. You can remove all generated file, the program binaries and object files
+  	 from the build directory by typing `make distclean'.  
+
+  6. Often, you can also type `make uninstall' to remove the installed
+     files again.
+     
+After successful installation go to ../src/ to find the executable "simpleTest".
+For project file structure see also README.
+	
+
+Defining Variables
+==================
+
+   Variables can be set in the environment passed to `cmake'. You should set
+   them in the `cmake' command line, using `-DVAR=value'.  For example:
+
+     cmake ../ -DCUDA_SDK_ROOT_DIR=/usr/local/NVIDIA_GPU_Computing_SDK/
+
+
+
+
+Optional Features for /inc/config.h
+===================================
+- set otional features in the `cmake' command line, using `-DVar=value'.
+  For example
+ 	cmake ../ -DMEASURED_TIMES=1 
+ or
+ 	cmake ../ -DMEASURED_TIMES=ON
+
+ 
+LARGE_INPUT
+  1[ON] : uint_t,sint_t -> ptrdiff_t
+  0[OFF]: uint_t, sint_t -> int
+
+MEASURED_TIMES:
+  1[ON]	: 	measured times for different steps and write it to struct members 
+  			cunfft_plan->CUNFFTTimes
+  0[OFF]: 	measured times only for the whole transformation. Write it to struct 				
+  			cunfft_plan->CUNFFTTimes->runTime
+
+MILLI_SEC:
+  1[ON]	: 	write time to stdout in ms
+  0[OFF]: 	write time to stdout in sec
+
+DEBUG:
+  1[ON]	: 	Verify cuda function calls, shows errors
+  0[OFF]: 	off
+
+PRINT_CONFIG
+  1[ON]	: 	Print launch configuration of kernel calls to stdout
+  0[OFF]: 	off
+
+COM_FG_PSI
+  1[ON]	: 	use fast gaussian gridding
+  0[OFF]: 	fast gaussian gridding off
+
+CUNFFT_DOUBLE_PRECISION
+  1[ON]	: 	computation in double precision
+  0[OFF]: 	computation in single precision
+
+CUT_OFF (default 6)
+  - cut-off parameter m for filtersize
+
+THREAD_DIM_X (default 16)
+  - manuell restriction for maximum numbers of threads per block in x direction for 2D launch grid
+  - see technical data of your grafic card for restrictions
+  
+THREAD_DIM_Y (default 16)
+  - manuell restriction for maximum numbers of threads per block in y direction for 2D launch grid
+  - see technical data of your grafic card for restrictions
+
+THREAD_DIM (default 512)
+  - manuell restriction for maximum numbers of threads per block in x direction for 1D launch grid (y direction=1)
+  - see also technical data of your grafic card for restrictions
+  
+MAX_NUM_THREADS: (default 1024)
+  - card restriction for maximum number of threads inside a block
+  - see also technical data of your grafic card for restrictions
+	
+MAX_BLOCK_DIM_X (default 1024)
+  - card restriction for maximum number of threads per block in x direction
+  - see also technical data of your grafic card for restrictions
+
+MAX_BLOCK_DIM_Y (default is 1024)
+  - card restriction for maximum numbers of threads per block in y direction
+  - see also technical data of your grafic card for restrictions
+  
+MAX_BLOCK_DIM_Z (default is 64)
+  - card restriction for maximum numbers of threads per block in z direction
+  - see also technical data of your grafic card for restrictions
+  
+MAX_GRID_DIM_X (default 65535)
+  - card restriction for maximum number of blocks per grid in x direction
+  - see also technical data of your grafic card for restrictions
+
+MAX_GRID_DIM_Y (default is 65535)
+  - card restriction for maximum numbers of blocks per grid in y direction
+  - see also technical data of your grafic card for restrictions
+  
+MAX_GRID_DIM_Z (default is 1)
+  - card restriction for maximum numbers of blocks per grid in z direction
+  - see also technical data of your grafic card for restrictions
+  
+

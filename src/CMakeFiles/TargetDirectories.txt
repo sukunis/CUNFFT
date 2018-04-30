@@ -1,0 +1,4 @@
+/home/math/sukunis/cuda-workspace/CUNFFT/src/src/CMakeFiles/clean_cuda_depends.dir
+/home/math/sukunis/cuda-workspace/CUNFFT/src/src/CMakeFiles/cunfft.dir
+/home/math/sukunis/cuda-workspace/CUNFFT/src/CMakeFiles/distclean.dir
+/home/math/sukunis/cuda-workspace/CUNFFT/src/src/CMakeFiles/simpleTest.dir
